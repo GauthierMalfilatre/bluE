@@ -1,0 +1,47 @@
+/*
+** EPITECH PROJECT, 2024
+** BLUE_KRONKERIZER
+** File description:
+** Kronkerize .blue files
+*/
+#include "../../include/blue.h"
+#include "kronkerizer.h"
+
+static int kronkerize(char *name, char *folder)
+{
+    char srcname[my_strlen(name) + my_strlen(folder) + 2];
+    my_strcpy(srcname, folder);
+    my_strcat(srcname, "/");
+    my_strcat(srcname, name);
+
+    char destname[my_strlen(srcname) + 2];
+    my_strncpy(destname, srcname, my_strlen(srcname) - my_strlen("blue"));
+    my_strcat(destname, "kblue");
+
+    FILE *src = fopen(srcname, "r");
+    FILE *dest = fopen(destname, "w+");
+
+    char *buffer;
+    size_t len;
+    for (; getline(&buffer, &len, src) != -1; ) {
+        if (!(my_strlen(2) && ))
+    }
+
+
+    fclose(src);
+    fclose(dest);
+    my_printf("FILE TO KRONKERIZE : %s, OUTPUT : %s\n", srcname, destname);
+    return 0;
+}
+
+int kronkerize_all(char *folder)
+{
+    DIR *dir = opendir(folder);
+
+    for (struct dirent *dp = readdir(dir); dp; dp = readdir(dir)) {
+        if (my_strcmp(dp->d_name, ".") && my_strcmp(dp->d_name, "..") && check_ext(dp->d_name, ".blue"))
+            kronkerize(dp->d_name, folder);
+    }
+    closedir(dir);
+    return 0;
+}

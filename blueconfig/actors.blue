@@ -1,0 +1,13 @@
+##
+## EPITECH PROJECT, 2024
+## BLUE_ACTORS
+## File description:
+## Creating actors for blue engine 0.1 
+##
+
+%bluefile ACTOR
+
+%blueconf LOAD ACTOR
+ACTOR TEAPOT (name = "teapot1", velocity = (1, 0))
+
+%blueconf LOAD END
