@@ -1,0 +1,3 @@
+%blueconfTEXTURES
+ADD(name=logo_texture,path=assets/picture/blue_logo.png)
+ADD(name=texture2,path=assets/picture/blue_logo.png)

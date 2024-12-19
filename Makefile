@@ -14,29 +14,29 @@ SRC =	src/test.c \
 
 OBJ = $(SRC:.c=.o)
 
-NAME = testblue
+OUT ?= .blue.out
 
 CFLAGS = -Wall -g -lcsfml-graphics -lcsfml-window -lcsfml-audio \
 	-lcsfml-system
 
-all: $(NAME)
+all: $(OUT)
 
-$(NAME): $(OBj)
+$(OUT): $(OBj)
 	@rm -f include/my.h
 	@rm -f include/my_printf.h
 	@make -C lib/my > /dev/null
 	@cp lib/libmy.a libmy.a
-	@gcc -o $(NAME) $(SRC) $(CFLAGS) -lm  -L./lib/ -lmy > /dev/null
+	@gcc -o $(OUT) $(SRC) $(CFLAGS) -lm  -L./lib/ -lmy > /dev/null
 	@echo MAKED
 	
 .PHONY: run
 run: re
-	@echo "RUNNING $(NAME)"
-	@./$(NAME)
-	@echo "SUCCESFULLY RUNNED $(NAME)"
+	@echo "RUNNING $(OUT)"
+	@./$(OUT)
+	@echo "SUCCESFULLY RUNNED $(OUT)"
 
 debug:	eliott
-	valgrind ./$(NAME)
+	valgrind ./$(OUT)
 
 .PHONY: clean
 clean:
@@ -49,7 +49,7 @@ clean:
 
 .PHONY: fclean
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(OUT)
 
 .PHONY: code
 code: fclean
@@ -62,7 +62,7 @@ code: fclean
 push: fclean
 	@git add .
 	@echo "What did you change ?" ; read COMMIT ; git commit -m "$$COMMIT"
-	@git push -u origin main
+	@git push -u origin dev
 
 re: fclean all
 

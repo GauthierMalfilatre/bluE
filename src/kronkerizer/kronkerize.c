@@ -21,13 +21,18 @@ static int kronkerize(char *name, char *folder)
     FILE *src = fopen(srcname, "r");
     FILE *dest = fopen(destname, "w+");
 
-    char *buffer;
-    size_t len;
-    for (; getline(&buffer, &len, src) != -1; ) {
-        if (!(my_strlen(2) && ))
+    char *buffer = NULL;
+    size_t len = 0;
+    for (int size = getline(&buffer, &len, src); size != -1; size = getline(&buffer, &len, src)) {
+        if ((size >= 2 && my_strncmp(buffer, "##", 2))) {
+            for (int i = 0; i < size; i++) {
+                if (buffer[i] && buffer[i] != ' ') {
+                    fprintf(dest, "%c", buffer[i]);
+                }
+            }
+        }
     }
-
-
+    free(buffer);
     fclose(src);
     fclose(dest);
     my_printf("FILE TO KRONKERIZE : %s, OUTPUT : %s\n", srcname, destname);

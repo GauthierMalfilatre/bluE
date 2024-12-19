@@ -1,0 +1,2 @@
+%blueconfACTORS
+ADD(name=logo,type=teapot,texture=logo_texture)
